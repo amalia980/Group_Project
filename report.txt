@@ -4,3 +4,14 @@ Rapport - Grupparbete
 Frågor:
 - Hur kan du i din webbläsare se ifall din Javascript-kod lyckas göra en request mot API:et?
 - Förklara hur man kan debugga Javascript.
+
+okey we want to:
+
+1. have two search user input fields. one is for "Enter artist", the other "Enter Song".
+
+2. we need a button to search through the API (objects) to find matching results from both userinputs.
+
+3. When lyrics is found, it will display on the website with an <textarea> created with javascript.
+
+4. if the user has not filled in the "artist" or the "song" field, then the button shall not be able 
+to be pressed. And the user shall get an "error message".
