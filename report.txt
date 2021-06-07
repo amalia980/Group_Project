@@ -1,5 +1,9 @@
 Rapport - Grupparbete
 
+problem med fetch av API. först fick jag cors policy error, fixade det genom att installera en live sever i VS code.
+men kan fortfarande få tillgång till datan i API:n, det dessutom "inject.js:343 GET http://127.0.0.1:5500/favicon.ico 404 (Not Found)" av min GET request.
+
+
 
 Frågor:
 - Hur kan du i din webbläsare se ifall din Javascript-kod lyckas göra en request mot API:et?

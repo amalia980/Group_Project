@@ -1,23 +1,27 @@
 //get API, data is in objects
 
 //info about the API. parameters are "artist" and "title". "lyrics" is the 
-/*
+
+
+/*====================================================================================*/
 function URL(artist, title) {
   return `https://api.lyrics.ovh/v1/${artist}/${title}`;
 }
 
-function showLyrics(artist, title) {
+function searchLyrics(artist, title) {
   const geturl = URL(artist, title);
 
-  fetch(geturl).then(function(response){
-      response.json().then(function(data) {
-
+  fetch(geturl).then(function(res){
+      res.json().then(function(data) {
+        console.log(data.lyrics);
       });
   });
 }
   
 showLyrics();
-*/
+
+/*====================================================================================*/
+
 
 //HTML elements needed
 //const form = document.getElementById("form");
@@ -26,7 +30,7 @@ const showLyrics = document.getElementById("lyrics");//create textarea inside th
 const errorMessage = document.getElementById("error");//show error message
 const songTitle = document.getElementById("song");//inputfield song
 const artistName = document.getElementById("artist");//inputfield artist
-
+/*
 function getLyrics(artist, title) {
   fetch("https://api.lyrics.ovh/v1/")
   .then(response => response.json())
@@ -34,7 +38,7 @@ function getLyrics(artist, title) {
     showLyrics.innerHTML = `<textarea ${lyrics.file}></textare>`
   });
 }
-
+*/
 getLyrics(artist.value, title.value);
 
 //create textarea to display results(the lyrics) in
