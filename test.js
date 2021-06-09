@@ -40,6 +40,7 @@ form.addEventListener('submit', e => {
 
   //if no input is entered show error message
 
+  //inputArtist.value === "" || inputSong.value === ""
   if (inputArtist && inputSong) {
     searchLyrics(inputArtist, inputSong);
 
@@ -49,3 +50,4 @@ form.addEventListener('submit', e => {
   }
 
 });
+

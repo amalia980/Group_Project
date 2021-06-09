@@ -5,41 +5,52 @@ const whenClicked = document.getElementById("button");//button
 const showLyrics = document.getElementById("lyrics");//create textarea inside this
 const errorMessage = document.getElementById("error");//show error message
 
-//fetch data from api
-const inputArtist = artistName.value;
-const inputSong = songTitle.value;
+  //have toLowerCase so users can be able to type in wit lowercase and still find results
+  
 
-//const artist = [];
-//const song = [];
+function URL(Artist, Song) {
+  return `https://api.lyrics.ovh/v1/${Artist}/${Song}`;
+}
 
-fetch(`https://api.lyrics.ovh/v1/${inputArtist}/${inputSong}`)
-    .then(function(response) {
-        response.json().then(function(data) {
-            
-            showResults(data.lyrics);
-        });
-    });
+function searchLyrics(Artist, Song) {
+  const geturl = URL(Artist, Song);
 
-    //create Elements to display result
-    function displayLyrics(theLyrics) {
+  fetch(geturl).then(function(res){
+      res.json().then(function(data) {
+
+        console.log(data.lyrics);
+
 
         const textArea = document.createElement('textarea');
-
-    }
+        showLyrics.appendChild(textArea);
+        textArea.innerText = data.lyrics;
+      })
+  });
+}
 
 //event listeners
 form.addEventListener('submit', e => {
-    e.preventDefault();
+  e.preventDefault();
 
-    //clears previous results
-    showLyrics.innerHTML = '';
+  const inputArtist = artistName.value;
+  const inputSong = songTitle.value;
 
-    if (inputArtist.value === "" || inputSong.value === "") {
+  //clears previous results
+  showLyrics.innerHTML = "";
 
-    }
-    else {
-        //searchLyrics(inputArtist, inputSong);
-    }
+  if (inputArtist && inputSong) {
+    searchLyrics(inputArtist, inputSong);
+
+  }  //inputArtist.value === "" || inputSong.value === ""
+  //if no input is entered show error message
+  else if (!inputArtist || !inputSong) {
+    errorMessage.innerText = "Please fill all with correct information";
+  }
+  else if (inputArtist.length > 0 && inputSong.length > 0) {
+      whenClicked.removeAttribute('disabled');
+  }
+  else {
+      whenClicked.setAttribute('disabled', 'disabled');
+  }
+
 });
-
-
