@@ -4,80 +4,48 @@ const songTitle = document.getElementById("song");//inputfield song
 const whenClicked = document.getElementById("button");//button
 const showLyrics = document.getElementById("lyrics");//create textarea inside this
 const errorMessage = document.getElementById("error");//show error message
-/*
-const URL = 'https://api.lyrics.ovh';
 
-//search by song and artist
+  //have toLowerCase so users can be able to type in wit lowercase and still find results
+  
 
-function searchLyrics(artist, title) {
-  fetch(`${URL}/suggest/${artist}/${title}`)
-  .then(res => res.json())
-  .then(data => console.log(data.lyrics));
-}
-*/
-
-function URL(artistValue, titleValue) {
-  return `https://api.lyrics.ovh/v1/${artistValue}/${titleValue}`;
+function URL(Artist, Song) {
+  return `https://api.lyrics.ovh/v1/${Artist}/${Song}`;
 }
 
-function searchLyrics(artistValue, titleValue) {
-  const geturl = URL(artistValue, titleValue);
+function searchLyrics(Artist, Song) {
+  const geturl = URL(Artist, Song);
 
   fetch(geturl).then(function(res){
       res.json().then(function(data) {
+
         console.log(data.lyrics);
 
-        //showResults(data.lyrics);
 
-      });
+        const textArea = document.createElement('textarea');
+        showLyrics.appendChild(textArea);
+        textArea.innerText = data.lyrics;
+      })
   });
 }
 
-//display results
-
-function showLResults(data) {
-/*
-   const textArea = document.createElement('textarea');
-   textArea.innerText = result;
-
-   showLyrics.appendChild(textArea);
-   console.log(textArea);*/
-
-   let output = "";
-
-   data.data.forEach(song => {
-     output += `<textare>`;
-   });
-}
-
-/*
-function showData(data) {
- let output = "";
-
- data.data.forEach(song => {
-   output += 
-  ``});
-}
-*/
-//event listerners
+//event listeners
 form.addEventListener('submit', e => {
   e.preventDefault();
 
-  const userArtist = artistName.value;
-  const userSong = songTitle.value;
+  const inputArtist = artistName.value;
+  const inputSong = songTitle.value;
+
+  //clears previous results
+  showLyrics.innerHTML = "";
 
   //if no input is entered show error message
-  if (userArtist && userSong) {
-    searchLyrics(userArtist, userSong);
+
+  if (inputArtist && inputSong) {
+    searchLyrics(inputArtist, inputSong);
 
   }
-  else if (!searchArtist || !searchSong) {
+  else if (!inputArtist || !inputSong) {
     errorMessage.innerText = "Please fill all with correct information";
   }
 
 });
-
-
-/*
-  const search = artist.value + title.value;
-  */
