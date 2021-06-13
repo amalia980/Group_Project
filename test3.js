@@ -29,7 +29,8 @@ function searchLyrics(Artist, Song) {
 }
 
 //event listeners
-form.addEventListener('input', (e) => {
+
+form.addEventListener("input", e => {
   e.preventDefault();
 
   const inputArtist = artistName.value;
@@ -39,18 +40,16 @@ form.addEventListener('input', (e) => {
   showLyrics.innerHTML = "";
 
   if (inputArtist.length > 0 && inputSong.length > 0) {
+    //document.getElementsByTagName("button")[0].removeAttribute("disabled");
     button.removeAttribute("disabled");
-    errorMessage.innerText = "";
-    button.addEventListener("click", e => {
-      e.preventDefault();
-      searchLyrics(inputArtist, inputSong);
-    });
+    searchLyrics(inputArtist, inputSong);//put button addeventlistener on this one
   }
-  else if (!inputArtist || !inputSong) {
+  else if (inputArtist === "" || inputSong === "") {
     errorMessage.innerText = "Please fill all with correct information";
-    button.setAttribute('disabled', 'disabled');
   }
-  else if (!inputArtist && !inputSong){
-    errorMessage.innerText = "";
+  else {
+      button.setAttribute("disabled", "disabled");
   }
 });
+
+// THIS ONE IS WORKING BUT IT DOES NOT LISTEN TO THE BUTTON

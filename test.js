@@ -29,7 +29,7 @@ function searchLyrics(Artist, Song) {
 }
 
 //event listeners
-form.addEventListener('submit', e => {
+form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const inputArtist = artistName.value;
@@ -38,16 +38,17 @@ form.addEventListener('submit', e => {
   //clears previous results
   showLyrics.innerHTML = "";
 
-  //if no input is entered show error message
-
-  //inputArtist.value === "" || inputSong.value === ""
-  if (inputArtist && inputSong) {
+  if (inputArtist.length > 0 && inputSong.length > 0) {
+    document.getElementsByTagName("button")[0].removeAttribute("disabled"); 
+  }
+  else if (inputArtist && inputSong) {
     searchLyrics(inputArtist, inputSong);
-
   }
   else if (!inputArtist || !inputSong) {
     errorMessage.innerText = "Please fill all with correct information";
   }
-
+  else {
+      button.setAttribute('disabled', 'disabled');
+  }
 });
 
