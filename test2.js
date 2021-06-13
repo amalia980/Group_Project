@@ -49,8 +49,9 @@ form.addEventListener('input', (e) => {
   else if (!inputArtist || !inputSong) {
     errorMessage.innerText = "Please fill all with correct information";
     button.setAttribute('disabled', 'disabled');
-  }
-  else if (!inputArtist && !inputSong){
+  }/*
+  else if (inputArtist.length <= 0 && inputSong.length <= 0){
     errorMessage.innerText = "";
-  }
+  }*/
 });
+
