@@ -38,9 +38,16 @@ function searchLyrics(Artist, Song) {
     showLyrics.innerHTML = "";
 
       if (inputArtist.length > 0 && inputSong.length > 0) {
+        button.style.marginTop = "0rem";
+        button.style.color = "white";
+        button.style.backgroundColor = "#1E0A37";
+        button.style.cursor = "pointer";
+        button.style.transition = "0.5s";
+        button.style.borderStyle = "none";
         button.removeAttribute("disabled");
         
         errorMessage.innerText = "";
+        
         
         button.addEventListener("click", e => {
           e.preventDefault();
@@ -48,6 +55,8 @@ function searchLyrics(Artist, Song) {
         });
       }
       else if (!inputArtist || !inputSong) {
+        errorMessage.style.transition = "0.5s";
+        errorMessage.style.marginTop = "1rem";
         errorMessage.innerText = "Please fill all with correct information";
         button.setAttribute('disabled', 'disabled');
       }/*

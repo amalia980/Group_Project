@@ -5,25 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GruppProjekt</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
-<h2>Search for Lyrics</h2>
+    <div id="container">
+        <h1>Search for Lyrics</h1>
 
-    <form id="form">
-        <input type="text" name="artist" placeholder="Enter Artist..." id="artist" >
-        <input type="text" name="song" placeholder="Enter Song..." id="song">
+        <div id="wrapper">
+            <form id="form">
+                <input type="text" name="artist" placeholder="Enter Artist..." id="artist" >
+                <input type="text" name="song" placeholder="Enter Song..." id="song">
+            <br>
+                <div id="error"></div>
+           
+                <button type="submit" id="button" disabled="disabled">Search</button >
+            </form>
 
-        <button type="submit" id="button" disabled="disabled">Search</button >
-    </form>
+            <!--show results in this div-->
+            <div id="lyrics"></div>
 
-    <!--show results in this div-->
-    <div id="lyrics"></div>
+            <!--show error in this div when none matching user input-->
+            
+    </div>
+</div>
 
-    <!--show error in this div when none matching user input-->
-    <div id="error"></div>
-
-    <script src="test2.js"></script>
+    <script src="test3.js"></script>
 </body>
 </html>
