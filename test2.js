@@ -38,20 +38,53 @@ form.addEventListener('input', (e) => {
   //clears previous results
   showLyrics.innerHTML = "";
 
-  if (inputArtist.length > 0 && inputSong.length > 0) {
-    button.removeAttribute("disabled");
-    errorMessage.innerText = "";
-    button.addEventListener("click", e => {
-      e.preventDefault();
-      searchLyrics(inputArtist, inputSong);
-    });
-  }
-  else if (!inputArtist || !inputSong) {
-    errorMessage.innerText = "Please fill all with correct information";
-    button.setAttribute('disabled', 'disabled');
-  }/*
-  else if (inputArtist.length <= 0 && inputSong.length <= 0){
-    errorMessage.innerText = "";
-  }*/
-});
 
+
+      // if BOTH inputs are filled
+      if (inputArtist.length > 0 && inputSong.length > 0) {
+        button.removeAttribute("disabled");
+        button.style.marginTop = "0";
+        button.style.color = "white";
+        button.style.backgroundColor = "#1E0A37";
+        button.style.cursor = "pointer";
+        button.style.transition = "0.5s";
+        button.style.borderStyle = "none";
+        
+        errorMessage.innerText = "";      
+        
+        button.addEventListener("click", e => {
+          e.preventDefault();
+          searchLyrics(inputArtist, inputSong);
+        });
+      }
+
+              // if both inputs are NOT filled
+              else if (!inputArtist.length && !inputSong.length) {
+                button.setAttribute('disabled', 'disabled');
+                button.style.margin = 0;
+                errorMessage.innerHTML = "";
+                
+              }
+
+      // if only ONE input is filled
+      else if(inputArtist.length > 0 || inputSong.length > 0) {
+        button.setAttribute('disabled', 'disabled');
+        button.style.marginTop = "1rem";
+        errorMessage.style.transition = "0.5s";
+        errorMessage.style.marginTop = "1rem";
+        errorMessage.innerHTML = "Please fill all with correct information";
+        
+        
+      }
+
+      else {
+        button.setAttribute("disabled", "disabled");
+      }
+  });
+
+/*
+- inputArtist < 0 && inputSong < 0 - doesnt work
+- !inputArtist && !inputSong
+- inputArtist === "" && inputSong === "" - doesnt work
+- inputArtist === 0 && inputSong === 0
+*/
