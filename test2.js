@@ -7,23 +7,24 @@ const errorMessage = document.getElementById("error");//show error message
 
   //have toLowerCase so users can be able to type in wit lowercase and still find results
   
-
+/*
 function URL(Artist, Song) {
-  return `https://api.lyrics.ovh/v1/${Artist}/${Song}`;
+  return `http://ianertson.com:3500/${Artist}/${Song}`;
 }
-
+*/
 function searchLyrics(Artist, Song) {
-  const geturl = URL(Artist, Song);
+  //const geturl = URL(Artist, Song);
 
-  fetch(geturl).then(function(res){
+
+
+  fetch(`http://ianertson.com:3500/${Artist}/${Song}`).then(function(res){
       res.json().then(function(data) {
-
+        const lyrics = data[0].lyrics/*.replace(/(\r\n|\r|\r|\n)/g, '<br />')*/; // [] = will get only the first result
         console.log(data.lyrics);
-
 
         const textArea = document.createElement('textarea');
         showLyrics.appendChild(textArea);
-        textArea.innerText = data.lyrics;
+        textArea.innerText = lyrics
       })
   });
 }
@@ -37,8 +38,6 @@ form.addEventListener('input', (e) => {
 
   //clears previous results
   showLyrics.innerHTML = "";
-
-
 
       // if BOTH inputs are filled
       if (inputArtist.length > 0 && inputSong.length > 0) {
@@ -58,28 +57,33 @@ form.addEventListener('input', (e) => {
         });
       }
 
-              // if both inputs are NOT filled
-              else if (!inputArtist.length && !inputSong.length) {
-                button.setAttribute('disabled', 'disabled');
-                button.style.margin = 0;
-                errorMessage.innerHTML = "";
+      // if both inputs are NOT filled
+        else if (!inputArtist.length && !inputSong.length) {
+          button.setAttribute('disabled', 'disabled');
+
+          button.style.color = null;
+          button.style.backgroundColor = null;
+          button.style.cursor = null;
+
+          button.style.margin = 0;
+          errorMessage.innerHTML = "";
                 
-              }
+      }
 
       // if only ONE input is filled
-      else if(inputArtist.length > 0 || inputSong.length > 0) {
-        button.setAttribute('disabled', 'disabled');
-        button.style.marginTop = "1rem";
-        errorMessage.style.transition = "0.5s";
-        errorMessage.style.marginTop = "1rem";
-        errorMessage.innerHTML = "Please fill all with correct information";
-        
-        
-      }
-
-      else {
-        button.setAttribute("disabled", "disabled");
-      }
+      //else if(!(inputArtist.length && inputSong.length)) {
+        else if(inputArtist.length > 0 || inputSong.length > 0) {
+          button.setAttribute('disabled', 'disabled');
+  
+          button.style.color = null;
+          button.style.backgroundColor = null;
+          button.style.cursor = null;
+  
+          button.style.marginTop = "1rem";
+          errorMessage.style.transition = "0.5s";
+          errorMessage.style.marginTop = "1rem";
+          errorMessage.innerText = "Please fill all with correct information";     
+        }
   });
 
 /*

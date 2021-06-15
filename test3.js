@@ -41,7 +41,7 @@ function searchLyrics(Artist, Song) {
 
     // if BOTH inputs are filled
       if (inputArtist.length > 0 && inputSong.length > 0) {
-        button.style.marginTop = "0";
+        button.style.marginTop = 0;
         button.style.color = "white";
         button.style.backgroundColor = "#1E0A37";
         button.style.cursor = "pointer";
@@ -59,19 +59,27 @@ function searchLyrics(Artist, Song) {
       // if both inputs are NOT filled
         else if (!inputArtist.length && !inputSong.length) {
             button.setAttribute('disabled', 'disabled');
+
+            button.style.color = null;
+            button.style.backgroundColor = null;
+            button.style.cursor = null;
+
             button.style.margin = 0;
-            errorMessage.innerHTML = "";      
+            errorMessage.innerText = "";      
           }
 
       // if only ONE input is filled
       else if(inputArtist.length > 0 || inputSong.length > 0) {
         button.setAttribute('disabled', 'disabled');
+
+        button.style.color = null;
+        button.style.backgroundColor = null;
+        button.style.cursor = null;
+
         button.style.marginTop = "1rem";
         errorMessage.style.transition = "0.5s";
         errorMessage.style.marginTop = "1rem";
-        errorMessage.innerHTML = "Please fill all with correct information";
-        
-        
+        errorMessage.innerText = "Please fill all with correct information";     
       }
 
   });
