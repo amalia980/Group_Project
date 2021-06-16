@@ -15,8 +15,6 @@ function URL(Artist, Song) {
 function searchLyrics(Artist, Song) {
   //const geturl = URL(Artist, Song);
 
-
-
   fetch(`http://ianertson.com:3500/${Artist}/${Song}`).then(function(res){
       res.json().then(function(data) {
         const lyrics = data[0].lyrics/*.replace(/(\r\n|\r|\r|\n)/g, '<br />')*/; // [] = will get only the first result
@@ -24,6 +22,7 @@ function searchLyrics(Artist, Song) {
 
         const textArea = document.createElement('textarea');
         showLyrics.appendChild(textArea);
+        textArea.className = "textarea";
         textArea.innerText = lyrics
       })
   });
@@ -54,6 +53,7 @@ form.addEventListener('input', (e) => {
         button.addEventListener("click", e => {
           e.preventDefault();
           searchLyrics(inputArtist, inputSong);
+          
         });
       }
 
