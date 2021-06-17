@@ -16,19 +16,22 @@ function searchLyrics(Artist, Song) {
 
   fetch(`http://ianertson.com:3500/${Artist}/${Song}`).then(function(res){
       res.json().then(function(data) {
-        const LYRICS = data[0].lyrics/*.replace(/(\r\n|\r|\n\n|\n)/g, '<br>')*/; // [] = will get only the first result
-        console.log(data.lyrics);
+        const LYRICS = data[0].lyrics.replace(/s(\n\r|\nExplain\nRequest\n \n\n\n\u00d7\n\n\n \n\n\n\n\n)/g, data[0], '<br>'); // [] = will get only the first result
+        console.log(LYRICS);
 
         
         if (textArea) { // clears previous results through removing the tag <textarea>
           textArea.parentNode.removeChild(textArea);
         }
 
+
         textArea = document.createElement('textarea');
         showLyrics.appendChild(textArea);                       //<textarea> inside ShowLyrics <div> 
         textArea.className = "textarea";
         
-        textArea.innerText = LYRICS
+        textArea.innerHTML = LYRICS
+        
+        
         const length = data[0].lyrics.length;
         
         if (length > 133) { // will set height to textarea according to length of content with 40rem as max
