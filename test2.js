@@ -4,8 +4,7 @@ const songTitle = document.getElementById("song");//inputfield song
 const button = document.getElementById("button");//button
 const showLyrics = document.getElementById("lyrics");//create textarea inside this
 const errorMessage = document.getElementById("error");//show error message
-
-  //have toLowerCase so users can be able to type in wit lowercase and still find results
+let textArea = null; //will remove previous results
   
 /*
 function URL(Artist, Song) {
@@ -17,14 +16,26 @@ function searchLyrics(Artist, Song) {
 
   fetch(`http://ianertson.com:3500/${Artist}/${Song}`).then(function(res){
       res.json().then(function(data) {
-        const lyrics = data[0].lyrics/*.replace(/(\r\n|\r|\r|\n)/g, '<br />')*/; // [] = will get only the first result
+        const LYRICS = data[0].lyrics/*.replace(/(\r\n|\r|\n\n|\n)/g, '<br>')*/; // [] = will get only the first result
         console.log(data.lyrics);
 
-        const textArea = document.createElement('textarea');
-        showLyrics.appendChild(textArea);
+        
+        if (textArea) { // clears previous results through removing the tag <textarea>
+          textArea.parentNode.removeChild(textArea);
+        }
+
+        textArea = document.createElement('textarea');
+        showLyrics.appendChild(textArea);                       //<textarea> inside ShowLyrics <div> 
         textArea.className = "textarea";
-        textArea.innerText = lyrics
-      })
+        
+        textArea.innerText = LYRICS
+        const length = data[0].lyrics.length;
+        
+        if (length > 133) { // will set height to textarea according to length of content with 40rem as max
+          textArea.style.height = "40rem";
+          console.log(length);
+        }
+      });
   });
 }
 
@@ -34,9 +45,6 @@ form.addEventListener('input', (e) => {
 
   const inputArtist = artistName.value;
   const inputSong = songTitle.value;
-
-  //clears previous results
-  showLyrics.innerHTML = "";
 
       // if BOTH inputs are filled
       if (inputArtist.length > 0 && inputSong.length > 0) {
