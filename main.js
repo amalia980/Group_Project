@@ -16,7 +16,7 @@ function searchLyrics(Artist, Song) {
 
   fetch(`http://ianertson.com:3500/${Artist}/${Song}`).then(function(res){
       res.json().then(function(data) {
-        const LYRICS = data[0].lyrics.replace(/s(\n\r)/g, data[0], '<br>'); // [] = will get only the first result
+        const LYRICS = data[0].lyrics.replace(/s(\n\r)/g,'\n'); // [] = will get only the first result
         console.log(LYRICS);
 
         
